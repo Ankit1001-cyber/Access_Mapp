@@ -1,0 +1,19 @@
+/* aboutUs.module.css */
+.aboutContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.aboutContainer h2 {
+  margin-bottom: 20px;
+}
+
+.aboutContainer h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.aboutContainer p {
+  text-align: justify;
+  margin-bottom: 20px;
+}

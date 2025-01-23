@@ -1,0 +1,40 @@
+.reportContainer {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reportContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reportContainer textarea,
+.reportContainer input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reportContainer input[type="file"] {
+  margin: 10px 0;
+}
+
+.reportContainer button {
+  width: 50%;
+  padding: 10px;
+  background: linear-gradient(to right, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reportContainer button:hover {
+  background: linear-gradient(to right, #a777e3, #6e8efb);
+}

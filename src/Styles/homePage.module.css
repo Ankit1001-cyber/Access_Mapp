@@ -1,0 +1,33 @@
+.homeContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.incidentsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.incidentCard,
+.sampleIncidentCard {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+}
+
+.images img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.contactUs {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}

@@ -1,0 +1,129 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #343a40;
+  color: #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  font-size: 1.2rem;
+}
+
+.logoButton {
+  font-size: 2rem;
+  color: #6e8efb;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logoButton img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.logoButton:hover {
+  color: #a777e3;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.navLinks li a:hover {
+  color: #6e8efb;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #818cf8;
+}
+
+.name {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+}
+
+.loginButton,
+.logOutButton {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.loginButton {
+  background-color: #6e8efb;
+  color: #1f1f1f;
+}
+
+.logOutButton {
+  background-color: #c12e2e;
+  color: #1f1f1f;
+}
+
+.logOutButton:hover {
+  background-color: #eba16b;
+  color: #e0e0e0;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .logoButton {
+    font-size: 1.5rem;
+  }
+
+  .logoButton img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .logoButton {
+    font-size: 1.2rem;
+  }
+
+  .logoButton img {
+    width: 35px;
+    height: 35px;
+  }
+}

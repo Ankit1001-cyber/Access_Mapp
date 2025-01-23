@@ -1,0 +1,17 @@
+/* app.module.css */
+.app {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.app h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.app button {
+  display: block;
+  margin: 20px auto;
+}

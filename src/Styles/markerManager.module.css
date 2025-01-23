@@ -1,0 +1,17 @@
+/* markerManager.module.css */
+.selectMarker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.selectMarker label {
+  margin-right: 10px;
+}
+
+.selectMarker select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

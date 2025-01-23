@@ -1,0 +1,143 @@
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.input,
+.dropdownButton,
+textarea {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.dropdownButton:focus,
+textarea:focus {
+  border-color: #6e8efb;
+  box-shadow: 0 0 3px rgba(110, 142, 251, 0.6);
+}
+
+.textarea {
+  resize: none;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 65%;
+  right: 12px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.eyeIcon:hover {
+  color: #333;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownButton {
+  width: 100%;
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  z-index: 10;
+}
+
+.dropdownItem {
+  padding: 10px;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background: #6e8efb;
+  color: #fff;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.file input {
+  font-size: 0.9rem;
+}
+
+.button {
+  background: linear-gradient(to right, #6e8efb, #a777e3);
+  color: #fff;
+  font-size: 1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient(to right, #a777e3, #6e8efb);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+}

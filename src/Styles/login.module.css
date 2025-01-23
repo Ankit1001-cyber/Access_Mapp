@@ -1,0 +1,100 @@
+/* login.module.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fefefe;
+}
+
+.form {
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000105;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+}
+
+.input {
+  width: 95%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: rgb(110, 105, 105);
+}
+
+.label {
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: rgb(83, 78, 78);
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 70%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+  color: #3bced8;
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  background-color: #a7d5e5;
+  color: #373b61;
+  font-size: large;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.button:hover {
+  background: linear-gradient(to right, #a777e3, #6e8efb);
+}
+
+.dropdown {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #373b61;
+}
+
+#toggle {
+  font-size: larger;
+  width: 100%;
+  background-color: #373b61;
+  color: #edeffe;
+}
+
+#toggle_2 {
+  font-size: larger;
+  width: 25%;
+  background-color: #373b61;
+  color: #edeffe;
+}
+
+.Register {
+  margin-top: 12px;
+}
+
+a {
+  color: #030415;
+  text-decoration: none;
+}

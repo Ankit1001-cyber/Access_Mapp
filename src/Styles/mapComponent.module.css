@@ -1,0 +1,16 @@
+/* mapComponent.module.css */
+.mapContainer {
+  height: 100vh;
+}
+
+.selectMarker {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
