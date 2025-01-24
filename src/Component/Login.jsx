@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
 import styles from "../Styles/login.module.css";
@@ -9,6 +9,7 @@ const Login = ({ setUser }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const Login = ({ setUser }) => {
       const response = await axios.post("/api/login", { email, password });
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
+      navigate("/home"); 
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }

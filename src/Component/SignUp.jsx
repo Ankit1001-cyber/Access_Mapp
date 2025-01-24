@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styles from "../Styles/signup.module.css";
 
 const SignUp = () => {
@@ -11,6 +13,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -25,15 +28,12 @@ const SignUp = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("dob", dob);
-    formData.append("password", password);
+    const userData = { name, email, dob, password };
 
     try {
-      const response = await axios.post("/api/signup", formData);
+      const response = await axios.post("/api/signup", userData);
       alert("Sign-Up successful!");
+      navigate("/login"); 
     } catch (error) {
       setError("Sign-up failed. Please try again.");
     }

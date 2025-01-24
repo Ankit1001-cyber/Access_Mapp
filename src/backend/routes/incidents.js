@@ -1,8 +1,8 @@
-const express = require('express');
-const multer = require('multer');
+const express = require("express");
+const multer = require("multer");
 const router = express.Router();
-const { CloudantV1 } = require('@ibm-cloud/cloudant');
-const { IamAuthenticator } = require('ibm-cloud-sdk-core');
+const { CloudantV1 } = require("@ibm-cloud/cloudant");
+const { IamAuthenticator } = require("ibm-cloud-sdk-core");
 
 const authenticator = new IamAuthenticator({
   apikey: process.env.CLOUDANT_API_KEY,
@@ -12,10 +12,9 @@ const cloudant = CloudantV1.newInstance({
 });
 cloudant.setServiceUrl(process.env.CLOUDANT_URL);
 
-// Configure multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -24,9 +23,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/', upload.array('images'), async (req, res, next) => {
+router.post("/", upload.array("images"), async (req, res, next) => {
   const { description, location } = req.body;
-  const images = req.files.map(file => ({
+  const images = req.files.map((file) => ({
     path: file.path,
     filename: file.filename,
   }));
@@ -36,12 +35,12 @@ router.post('/', upload.array('images'), async (req, res, next) => {
     location: JSON.parse(location),
     images,
     createdAt: new Date().toISOString(),
-    votes: { true: 0, false: 0 }
+    votes: { true: 0, false: 0 },
   };
 
   try {
     const response = await cloudant.postDocument({
-      db: 'incidents',
+      db: "incidents",
       document,
     });
     res.status(201).json({ id: response.result.id, rev: response.result.rev });
@@ -50,10 +49,10 @@ router.post('/', upload.array('images'), async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const response = await cloudant.postAllDocs({
-      db: 'incidents',
+      db: "incidents",
       includeDocs: true,
     });
 
@@ -67,13 +66,13 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/vote/:id', async (req, res, next) => {
+router.post("/vote/:id", async (req, res, next) => {
   const { id } = req.params;
-  const { vote } = req.body; // 'true' or 'false'
+  const { vote } = req.body;
 
   try {
     const response = await cloudant.getDocument({
-      db: 'incidents',
+      db: "incidents",
       docId: id,
     });
 
@@ -81,23 +80,22 @@ router.post('/vote/:id', async (req, res, next) => {
     incident.votes[vote] += 1;
 
     if (incident.votes.true > 5) {
-      // Automatically mark the incident on the map
       const newMarker = {
         latitude: incident.location.latitude,
         longitude: incident.location.longitude,
-        type: 'incident',
+        type: "incident",
         description: incident.description,
         createdAt: new Date().toISOString(),
       };
 
       await cloudant.postDocument({
-        db: 'locations',
+        db: "locations",
         document: newMarker,
       });
     }
 
     const updateResponse = await cloudant.putDocument({
-      db: 'incidents',
+      db: "incidents",
       docId: id,
       document: incident,
     });

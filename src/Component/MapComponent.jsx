@@ -6,7 +6,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "../Styles/mapComponent.module.css";
 
-// Ensure the leaflet icons are correctly referenced
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconUrl:
@@ -17,28 +16,20 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-// Custom marker icon
-const customIcon = new L.Icon({
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-
-const createCustomIcon = (color) => {
+const createCustomIcon = (color, size = [20, 20]) => {
   return L.divIcon({
     className: "leaflet-div-icon",
-    html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #ffffff;"></div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    html: `<div style="background-color: ${color}; width: ${size[0]}px; height: ${size[1]}px; border-radius: 100%; border: 2px solid #ffffff;"></div>`,
+    iconSize: size,
+    iconAnchor: [size[0] / 2, size[1]],
   });
 };
 
 const sampleIcons = {
-  ramp: createCustomIcon("green"),
-  elevator: createCustomIcon("purple"),
-  wheelchair: createCustomIcon("blue"),
-  escalator: createCustomIcon("red"),
+  ramp: createCustomIcon("green", [20, 20]),
+  elevator: createCustomIcon("purple", [20, 20]),
+  wheelchair: createCustomIcon("blue", [20, 20]),
+  escalator: createCustomIcon("red", [20, 20]),
 };
 
 const MapComponent = () => {
@@ -46,6 +37,7 @@ const MapComponent = () => {
   const [markers, setMarkers] = useState([]);
   const [incidents, setIncidents] = useState([]);
   const [markerType, setMarkerType] = useState("ramp");
+  // const [legendVisible, setLegendVisible] = useState(false);
 
   useEffect(() => {
     axios
@@ -100,7 +92,7 @@ const MapComponent = () => {
       })
       .catch((error) => console.error("Error voting on incident:", error));
   };
-  //  sample records
+
   const generateSampleMarkers = (location) => {
     const sampleMarkers = [
       {
@@ -140,73 +132,107 @@ const MapComponent = () => {
     : [];
 
   return (
-    <MapContainer
-      center={currentLocation || [51.505, -0.09]}
-      zoom={13}
-      className={styles.mapContainer}
-      whenCreated={(map) => {
-        map.on("click", addMarker);
-        if (currentLocation) {
-          map.setView(currentLocation, 13);
-        }
-      }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="&copy; OpenStreetMap contributors"
-      />
+    <div className={styles.mapWrapper}>
+      <div className={styles.legend}>
+        <h3>Marker Types</h3>
+        <div className={styles.legendItem}>
+          <div
+            className={styles.legendColor}
+            style={{ backgroundColor: "green" }}
+          ></div>
+          <span>Ramp</span>
+        </div>
+        <div className={styles.legendItem}>
+          <div
+            className={styles.legendColor}
+            style={{ backgroundColor: "purple" }}
+          ></div>
+          <span>Elevator</span>
+        </div>
+        <div className={styles.legendItem}>
+          <div
+            className={styles.legendColor}
+            style={{ backgroundColor: "blue" }}
+          ></div>
+          <span>Wheelchair Accessible</span>
+        </div>
+        <div className={styles.legendItem}>
+          <div
+            className={styles.legendColor}
+            style={{ backgroundColor: "red" }}
+          ></div>
+          <span>Escalator</span>
+        </div>
+      </div>
 
-      {currentLocation && (
-        <Marker position={currentLocation} icon={customIcon}>
-          <Popup>You are here!</Popup>
-        </Marker>
-      )}
+      <MapContainer
+        center={currentLocation || [51.505, -0.09]}
+        zoom={13}
+        className={styles.mapContainer}
+        whenCreated={(map) => {
+          map.on("click", addMarker);
+          if (currentLocation) {
+            map.setView(currentLocation, 13);
+          }
+        }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
+        />
 
-      {markers.map((marker) => (
-        <Marker
-          key={marker.id}
-          position={[marker.latitude, marker.longitude]}
-          icon={customIcon}
-        >
-          <Popup>
-            {marker.description}
-            <br />
-            <button onClick={() => removeMarker(marker.id)}>Remove</button>
-          </Popup>
-        </Marker>
-      ))}
+        {currentLocation && (
+          <Marker position={currentLocation}>
+            <Popup>You are here!</Popup>
+          </Marker>
+        )}
 
-      {sampleMarkers.map((marker) => (
-        <Marker
-          key={marker.id}
-          position={[marker.latitude, marker.longitude]}
-          icon={sampleIcons[marker.type]}
-        >
-          <Popup>{marker.description}</Popup>
-        </Marker>
-      ))}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={[marker.latitude, marker.longitude]}
+            icon={sampleIcons[marker.type]}
+          >
+            <Popup>
+              {marker.description}
+              <br />
+              <button onClick={() => removeMarker(marker.id)}>Remove</button>
+            </Popup>
+          </Marker>
+        ))}
 
-      {incidents.map((incident) => (
-        <Marker
-          key={incident.id}
-          position={[incident.latitude, incident.longitude]}
-          icon={customIcon}
-        >
-          <Popup>
-            {incident.description}
-            <br />
-            <button onClick={() => voteIncident(incident.id, "true")}>
-              Vote True
-            </button>
-            <button onClick={() => voteIncident(incident.id, "false")}>
-              Vote False
-            </button>
-            <br />
-            Votes: {incident.votes.true} True, {incident.votes.false} False
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+        {sampleMarkers.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={[marker.latitude, marker.longitude]}
+            icon={sampleIcons[marker.type]}
+          >
+            <Popup>{marker.description}</Popup>
+          </Marker>
+        ))}
+
+        {incidents.map((incident) => (
+          <Marker
+            key={incident.id}
+            position={[incident.latitude, incident.longitude]}
+            icon={sampleIcons["ramp"]}
+          >
+            <Popup>
+              {incident.description}
+              <br />
+              <button onClick={() => voteIncident(incident.id, "true")}>
+                Vote True
+              </button>
+              <button onClick={() => voteIncident(incident.id, "false")}>
+                Vote False
+              </button>
+              <br />
+              Votes: {incident.votes.true} True, {incident.votes.false} False
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 };
 
