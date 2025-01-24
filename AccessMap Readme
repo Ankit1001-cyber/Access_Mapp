@@ -1,0 +1,31 @@
+# Access Map
+
+## Overview
+Access Map is a web application designed to provide information about accessibility features in public spaces. Users can view and report incidents related to accessibility, such as the availability of ramps, elevators, wheelchair access, and more. The application utilizes an interactive map to display these features and incidents.
+
+## Features
+- View accessibility features (ramps, elevators, wheelchair access, etc.)
+- Report incidents related to accessibility
+- Vote on reported incidents
+- User authentication and authorization
+- Real-time map updates
+
+## Technologies Used
+- Frontend: React, React Router, Axios, Leaflet
+- Backend: Node.js, Express
+- Database: IBM Cloudant
+- Authentication: IBM App ID, JWT
+- Styling: CSS Modules
+- Deployment: Docker
+
+## Installation
+
+### Prerequisites
+- Node.js and npm installed
+- Docker installed (optional for containerized deployment)
+
+### Frontend Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ankit1001-cyber/Access_map.git
+   cd Access_map
