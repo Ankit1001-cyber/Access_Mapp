@@ -8,7 +8,7 @@ import {
 import Navbar from "./Component/navbar";
 import Login from "./Component/Login";
 import SignUp from "./Component/SignUp";
-import ReportIncident from "./Component/ReportIncident"
+import ReportIncident from "./Component/ReportIncident";
 import HomePage from "./Component/Homepage";
 import AboutUs from "./Component/AboutUs";
 import MapComponent from "./Component/MapComponent";
@@ -52,8 +52,11 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/map" element={<MapComponent />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/report" element={<ReportIncident/>}/>
-        <Route path="/profile" element={<Profile user={user} />} />
+        <Route path="/report" element={<ReportIncident />} />
+        <Route
+          path="/profile"
+          element={user ? <Profile user={user} /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );
